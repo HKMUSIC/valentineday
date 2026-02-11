@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love 💓</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins, sans-serif;
+        }
+
+        body {
+            background: rgb(240, 173, 184);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ❤️ Heart Rain */
+        #heartRain {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Main */
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn1 {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .img-box img {
+            width: 150px;
+            animation: zoom 3s infinite ease-in-out;
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(0.8);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(0.8);
+            }
+        }
+
+        .text {
+            margin-top: 15px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            visibility: hidden;
+            z-index: 3;
+        }
+
+        .overlay.active {
+            visibility: visible;
+        }
+
+        /* Popup */
+        .pop-up {
+            width: 90%;
+            max-width: 380px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 14px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.1);
+            padding: 30px;
+            text-align: center;
+            visibility: hidden;
+            transition: 0.4s ease;
+            z-index: 4;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .pop-up.active {
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .heading1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .heading1.big {
+            font-size: 34px;
+        }
+
+        .text1 {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        /* Button */
+        .pushable {
+            background: hsl(348deg 100% 32%);
+            border-radius: 12px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .front {
+            display: block;
+            padding: 12px 22px;
+            background: hsl(345deg 100% 47%);
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            transform: translateY(-5px);
+        }
+
+        .pushable:active .front {
+            transform: translateY(-2px);
+        }
+
+        .img1 {
+            background-color: white;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ❤️ HEART RAIN -->
+    <canvas id="heartRain"></canvas>
+
+    <!-- MAIN -->
+    <div class="container">
+        <button class="btn1" onclick="openPopup(0)">
+            <div class="img-box">
+                <img
+                    src="Love_Letter_Hd_Transparent__Love_Letter__Cute__Love__Love_Clipart_PNG_Image_For_Free_Download-removebg-preview.png">
+            </div>
+            <div class="text">Gift for you my love💓, I hope you like it😘</div>
+            <img width="200px" src="e2a6a7a75212d5202e797e25b07870b0.gif" alt="">
+        </button>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- POPUP 1 -->
+    <div class="pop-up" id="popup0" style="background-image:url('bg1.gif')">
+        <span class="close" onclick="closeAll()">❌</span>
+        <h1 class="heading1">Hey You 💖</h1>
+        <div class="img1">
+            <img width="200px" src="7d303601db1fb314d358bcc6e79bfd34.gif" alt="">
+        </div>
+        <div class="text1">Do min ruk ke dekh le teri liye gift 😁💖</div>
+        <button class="pushable" onclick="nextPopup(0)">
+            <span class="front">Next ➡</span>
+        </button>
+    </div>
+
+    <!-- POPUP 2 -->
+    <div class="pop-up" id="popup1" style="background-image:url('bg2.gif')">
+        <span class="close" onclick="closeAll()">❌</span>
+        <h1 class="heading1">💌</h1>
+        <div class="img1">
+            <img width="200px" src="dc499841254b3ba4264dc18aa80d8c39.gif" alt="">
+        </div>
+        <div class="text1">Jab tu hasti hai na , to asa lgta ki pure world ki light agyi !! 💖</div>
+        <button class="pushable" onclick="nextPopup(1)">
+            <span class="front">Next ➡</span>
+        </button>
+    </div>
+
+    <!-- POPUP 3 -->
+    <div class="pop-up" id="popup2" style="background-image:url('bg3.gif')">
+        <span class="close" onclick="closeAll()">❌</span>
+        <h1 class="heading1">Arz kiya hai✨</h1>
+        <div class="img1">
+            <img width="200px" src="fd3530b992c00cc1556a794a306cef45.gif" alt="">
+        </div>
+        <div class="text1">Na chand chayie, na falak chayie..💖</div>
+        <div class="text1">mujhe bs teri ek jhalak chayie😘</div>
+        <button class="pushable" onclick="nextPopup(2)">
+            <span class="front">Next ➡</span>
+        </button>
+    </div>
+
+    <!-- POPUP 4 -->
+    <div class="pop-up" id="popup3" style="background-image:url('bg4.gif')">
+        <span class="close" onclick="closeAll()">❌</span>
+        <h1 class="heading1">💗</h1>
+        <div class="img1">
+            <img width="200px" src="f8359edf57d996f26dd6a17dc0ddca53.gif" alt="">
+        </div>
+        <div class="text1">tere bina abb tution mei bhi acha nhi lgta pls tu jldi tution aja fir dono baat krenge last
+            mei beth ke😁</div>
+        <button class="pushable" onclick="showLove()">
+            <span class="front">Finish 💝</span>
+        </button>
+    </div>
+
+    <!-- FINAL LOVE POPUP -->
+    <div class="pop-up love" id="popup4" style="background-image:url('bg5.gif')">
+        <h1 class="heading1 big">I LOVE YOU ❤️</h1>
+        <div class="text1">Forever & Always 💞</div>
+        <div class="img1">
+            <img width="200px" src="7d303601db1fb314d358bcc6e79bfd34.gif" alt="">
+        </div>
+        <button class="pushable" onclick="closeAll()">
+            <span class="front">Close 💖</span>
+        </button>
+    </div>
+
+    <script>
+        const overlay = document.getElementById("overlay");
+        const popups = document.querySelectorAll(".pop-up");
+
+        /* POPUP FLOW */
+        function openPopup(i) {
+            popups[i].classList.add("active");
+            overlay.classList.add("active");
+        }
+
+        function nextPopup(i) {
+            popups[i].classList.remove("active");
+            popups[i + 1].classList.add("active");
+        }
+
+        function showLove() {
+            popups[3].classList.remove("active");
+            popups[4].classList.add("active");
+        }
+
+        function closeAll() {
+            overlay.classList.remove("active");
+            popups.forEach(p => p.classList.remove("active"));
+        }
+
+        /* ❤️ HEART RAIN */
+        const canvas = document.getElementById("heartRain");
+        const ctx = canvas.getContext("2d");
+
+        function resize() {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        const hearts = Array.from({ length: 45 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 15 + 8,
+            speed: Math.random() * 1.4 + 0.6
+        }));
+
+        function drawHeart(x, y, s) {
+            ctx.fillStyle = "rgba(255,0,100,0.7)";
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(x - s, y - s, x - s * 2, y + s / 2, x, y + s);
+            ctx.bezierCurveTo(x + s * 2, y + s / 2, x + s, y - s, x, y);
+            ctx.fill();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hearts.forEach(h => {
+                drawHeart(h.x, h.y, h.size);
+                h.y += h.speed;
+                if (h.y > canvas.height) {
+                    h.y = -20;
+                    h.x = Math.random() * canvas.width;
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+
+  </html>
