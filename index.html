@@ -46,19 +46,22 @@
 
         .img-box img {
             width: 150px;
+            border-radius: 10px; /* Thoda curve diya taaki image achi lage */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             animation: zoom 3s infinite ease-in-out;
         }
 
         @keyframes zoom {
-            0% { transform: scale(0.8); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(0.8); }
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0.9); }
         }
 
         .text {
             margin-top: 15px;
             font-size: 22px;
             font-weight: 600;
+            color: #4a0e16; /* Text color thoda dark kiya readability ke liye */
         }
 
         /* Overlay */
@@ -161,7 +164,7 @@
     <div class="container">
         <button class="btn1" onclick="openPopup(0)">
             <div class="img-box">
-                <img src="Love_Letter_Hd_Transparent__Love_Letter__Cute__Love__Love_Clipart_PNG_Image_For_Free_Download-removebg-preview.png">
+                <img src="https://files.catbox.moe/yagovg.jpg" alt="Love Letter">
             </div>
             <div class="text">Gift for you my love💓, I hope you like it😘</div>
             <img width="200px" src="e2a6a7a75212d5202e797e25b07870b0.gif" alt="">
@@ -235,17 +238,17 @@
         const popups = document.querySelectorAll(".pop-up");
         const music = document.getElementById("bgMusic");
 
-        // 🎵 Music Playlist Setup
+        // 🎵 Music Playlist Setup (Make sure file names match exactly in GitHub)
         const playlist = ["bgsong1.mp3", "bgsong2.mp3"];
         let currentSongIndex = 0;
         let isMusicPlaying = false;
 
         function playNextSong() {
             music.src = playlist[currentSongIndex];
-            music.volume = 0.35; // 35% Volume as requested
+            music.volume = 0.35; // 35% Volume
             music.play().catch(e => console.log("Audio play blocked until click"));
             
-            // Increment index for next time, loop back to 0 if at end
+            // Prepare index for next song
             currentSongIndex = (currentSongIndex + 1) % playlist.length;
         }
 
@@ -256,7 +259,7 @@
 
         /* POPUP FLOW */
         function openPopup(i) {
-            // Start music on first interaction
+            // Start music on first click
             if (!isMusicPlaying) {
                 playNextSong();
                 isMusicPlaying = true;
