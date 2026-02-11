@@ -19,6 +19,80 @@
             overflow: hidden;
         }
 
+        /* 🔐 Lock Screen Styles */
+        #lockScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffe6f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            transition: opacity 1s ease, visibility 1s;
+        }
+
+        #lockScreen h2 {
+            color: #ff3385;
+            font-size: 22px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .password-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lock-icon {
+            font-size: 28px;
+            color: #ff4da6;
+            transition: transform 1s, color 0.5s;
+        }
+
+        .unlock {
+            transform: rotate(45deg);
+            color: #2ecc71;
+        }
+
+        #passwordInput {
+            padding: 12px 18px;
+            font-size: 18px;
+            border-radius: 12px;
+            border: 2px solid #ff4da6;
+            text-align: center;
+            outline: none;
+            background: white;
+        }
+
+        #errorMsg {
+            color: #e74c3c;
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 20px;
+        }
+
+        .unlock-btn {
+            background: #ff4da6;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .unlock-btn:hover {
+            background: #ff1a8c;
+            transform: scale(1.05);
+        }
+
         /* ❤️ Heart Rain */
         #heartRain {
             position: fixed;
@@ -27,7 +101,7 @@
             pointer-events: none;
         }
 
-        /* Main */
+        /* Main Container */
         .container {
             height: 100vh;
             display: flex;
@@ -46,7 +120,7 @@
 
         .img-box img {
             width: 150px;
-            border-radius: 10px; /* Thoda curve diya taaki image achi lage */
+            border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             animation: zoom 3s infinite ease-in-out;
         }
@@ -59,9 +133,11 @@
 
         .text {
             margin-top: 15px;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
-            color: #4a0e16; /* Text color thoda dark kiya readability ke liye */
+            color: #4a0e16;
+            max-width: 300px;
+            line-height: 1.4;
         }
 
         /* Overlay */
@@ -115,13 +191,10 @@
             margin-bottom: 10px;
         }
 
-        .heading1.big {
-            font-size: 34px;
-        }
-
         .text1 {
-            font-size: 20px;
-            margin: 20px 0;
+            font-size: 19px;
+            margin: 15px 0;
+            font-weight: 500;
         }
 
         /* Button */
@@ -157,6 +230,17 @@
 
 <body>
 
+    <div id="lockScreen">
+        <h2>Please enter the code 🔐</h2>
+        <div class="password-box">
+            <span id="lck1" class="lock-icon">🔒</span>
+            <input type="password" id="passwordInput" placeholder="Password? 🥺">
+            <span id="lck2" class="lock-icon">🔒</span>
+        </div>
+        <button class="unlock-btn" onclick="checkPass()">Unlock</button>
+        <div id="errorMsg"></div>
+    </div>
+
     <audio id="bgMusic"></audio>
 
     <canvas id="heartRain"></canvas>
@@ -179,7 +263,7 @@
         <div class="img1">
             <img width="200px" src="7d303601db1fb314d358bcc6e79bfd34.gif" alt="">
         </div>
-        <div class="text">ᴋʜᴀɪ ʜᴀᴀᴍ ᴋᴜᴄʜ ɢᴀʟᴀᴛ ɴ ʙᴏʟ ᴊᴀʏᴇ ,</div> 
+        <div class="text1">ᴋʜᴀɪ ʜᴀᴀᴍ ᴋᴜᴄʜ ɢᴀʟᴀᴛ ɴ ʙᴏʟ ᴊᴀʏᴇ ,</div> 
         <div class="text1">ɪsɪʟɪʏᴇ ᴊᴜʙᴀɴ ᴘʀ ᴀʙʜɪ ɪ ʟᴏᴠʀ ᴜ┑(￣▽￣)┍ ʜɪɪɪ ᴀʏᴇ😁</div>
         <button class="pushable" onclick="nextPopup(0)">
             <span class="front">Next ➡</span>
@@ -205,10 +289,8 @@
         <div class="img1">
             <img width="200px" src="fd3530b992c00cc1556a794a306cef45.gif" alt="">
         </div>
-        <div class="text1">ᴀᴀʙ ᴄʜᴀɴᴅ ʙᴏʟᴜ ɢʜᴀ</div>
-        <div class="text1">ᴛᴜ ʙᴏʟɪ ɢʜɪ ᴊᴜᴛʜ ɴᴀ ʙᴏʟ😑</div>
-        <div class="text1">ɪsɪʟɪʏᴇ ᴄʜᴀɴᴅ ʙʜɪ ᴘᴀɴɪ ʙᴀᴀɴ ᴊᴀʏᴇ😶</div>
-        <div class="text1">ᴊᴀʙ ᴛᴇʀɪ ᴇᴋ ᴊᴀʟᴀᴋ ᴘᴀᴀ ᴊᴀʏᴇ😌</div>
+        <div class="text1">ᴀᴀʙ ᴄʜᴀɴᴅ ʙᴏʟᴜ ɢʜᴀ... ᴛᴜ ʙᴏʟɪ ɢʜɪ ᴊᴜᴛʜ ɴᴀ ʙᴏʟ😑</div>
+        <div class="text1">ɪsɪʟɪʏᴇ ᴄʜᴀɴᴅ ʙʜɪ ᴘᴀɴɪ ʙᴀᴀɴ ᴊᴀʏᴇ😶 ᴊᴀʙ ᴛᴇʀɪ ᴇᴋ ᴊᴀʟᴀᴋ ᴘᴀᴀ ᴊᴀʏᴇ😌</div>
         <button class="pushable" onclick="nextPopup(2)">
             <span class="front">Next ➡</span>
         </button>
@@ -227,7 +309,7 @@
     </div>
 
     <div class="pop-up love" id="popup4" style="background-image:url('bg5.gif')">
-        <h1 class="heading1 big">I LOVE YOU ❤️</h1>
+        <h1 class="heading1" style="font-size: 34px;">I LOVE YOU ❤️</h1>
         <div class="text1">ᴛᴜ ʙʜɪ ᴋᴀʀᴛɪ ɪᴋ ᴘʀ ᴅᴍ ᴍᴀɪ ʀᴇᴘʟʏ ᴀᴀ ᴊᴀɴᴀ ᴄʜᴀʏᴇ🤠</div>
         <div class="img1">
             <img width="200px" src="7d303601db1fb314d358bcc6e79bfd34.gif" alt="">
@@ -242,28 +324,51 @@
         const popups = document.querySelectorAll(".pop-up");
         const music = document.getElementById("bgMusic");
 
-        // 🎵 Music Playlist Setup (Make sure file names match exactly in GitHub)
+        // 🔐 Lock Screen Logic
+        function checkPass() {
+            const input = document.getElementById("passwordInput").value.trim().toLowerCase(); // lowercase taaki typo na ho
+            const l1 = document.getElementById("lck1");
+            const l2 = document.getElementById("lck2");
+            const err = document.getElementById("errorMsg");
+            const screen = document.getElementById("lockScreen");
+
+            // NEW PASSWORD: babu
+            if (input === "babu") {
+                l1.classList.add("unlock");
+                l2.classList.add("unlock");
+                err.innerText = "";
+                setTimeout(() => {
+                    screen.style.opacity = "0";
+                    setTimeout(() => { screen.style.visibility = "hidden"; }, 1000);
+                }, 800);
+            } else {
+                err.innerText = "❌ Password galat hai, soch ke dalo! 🙄";
+            }
+        }
+
+        // Allow 'Enter' key to unlock
+        document.getElementById("passwordInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkPass();
+            }
+        });
+
+        // 🎵 Music Setup
         const playlist = ["bgsong1.mp3", "bgsong2.mp3"];
         let currentSongIndex = 0;
         let isMusicPlaying = false;
 
         function playNextSong() {
             music.src = playlist[currentSongIndex];
-            music.volume = 0.35; // 35% Volume
-            music.play().catch(e => console.log("Audio play blocked until click"));
-            
-            // Prepare index for next song
+            music.volume = 0.35;
+            music.play().catch(e => console.log("Play blocked"));
             currentSongIndex = (currentSongIndex + 1) % playlist.length;
         }
 
-        // Automatic switch when song ends
-        music.onended = function() {
-            playNextSong();
-        };
+        music.onended = () => playNextSong();
 
         /* POPUP FLOW */
         function openPopup(i) {
-            // Start music on first click
             if (!isMusicPlaying) {
                 playNextSong();
                 isMusicPlaying = true;
@@ -290,11 +395,7 @@
         /* ❤️ HEART RAIN */
         const canvas = document.getElementById("heartRain");
         const ctx = canvas.getContext("2d");
-
-        function resize() {
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
-        }
+        function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
         resize();
         window.addEventListener("resize", resize);
 
@@ -319,14 +420,12 @@
             hearts.forEach(h => {
                 drawHeart(h.x, h.y, h.size);
                 h.y += h.speed;
-                if (h.y > canvas.height) {
-                    h.y = -20;
-                    h.x = Math.random() * canvas.width;
-                }
+                if (h.y > canvas.height) { h.y = -20; h.x = Math.random() * canvas.width; }
             });
             requestAnimationFrame(animate);
         }
         animate();
     </script>
 </body>
+
 </html>
