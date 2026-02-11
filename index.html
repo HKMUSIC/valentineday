@@ -241,6 +241,7 @@
         <div id="errorMsg"></div>
     </div>
 
+    <audio id="lockMusic" src="bgsong3.mp3" loop></audio>
     <audio id="bgMusic"></audio>
 
     <canvas id="heartRain"></canvas>
@@ -323,20 +324,32 @@
         const overlay = document.getElementById("overlay");
         const popups = document.querySelectorAll(".pop-up");
         const music = document.getElementById("bgMusic");
+        const lockMusic = document.getElementById("lockMusic");
+
+        // 🔐 Lock Screen Music Start Logic
+        // Browser requires interaction, so we start it on first touch/click
+        document.body.addEventListener('click', () => {
+            if(lockMusic.paused && !isMusicPlaying) {
+                lockMusic.play().catch(e => console.log("Music play effort"));
+            }
+        }, {once: true});
 
         // 🔐 Lock Screen Logic
         function checkPass() {
-            const input = document.getElementById("passwordInput").value.trim().toLowerCase(); // lowercase taaki typo na ho
+            const input = document.getElementById("passwordInput").value.trim().toLowerCase(); 
             const l1 = document.getElementById("lck1");
             const l2 = document.getElementById("lck2");
             const err = document.getElementById("errorMsg");
             const screen = document.getElementById("lockScreen");
 
-            // NEW PASSWORD: babu
             if (input === "babu") {
                 l1.classList.add("unlock");
                 l2.classList.add("unlock");
                 err.innerText = "";
+                
+                // Stop the lock music immediately
+                lockMusic.pause(); 
+                
                 setTimeout(() => {
                     screen.style.opacity = "0";
                     setTimeout(() => { screen.style.visibility = "hidden"; }, 1000);
@@ -346,14 +359,13 @@
             }
         }
 
-        // Allow 'Enter' key to unlock
         document.getElementById("passwordInput").addEventListener("keyup", function(event) {
             if (event.key === "Enter") {
                 checkPass();
             }
         });
 
-        // 🎵 Music Setup
+        // 🎵 Main Music Setup
         const playlist = ["bgsong1.mp3", "bgsong2.mp3"];
         let currentSongIndex = 0;
         let isMusicPlaying = false;
@@ -370,6 +382,7 @@
         /* POPUP FLOW */
         function openPopup(i) {
             if (!isMusicPlaying) {
+                // Main music starts only after unlocking and clicking the gift
                 playNextSong();
                 isMusicPlaying = true;
             }
